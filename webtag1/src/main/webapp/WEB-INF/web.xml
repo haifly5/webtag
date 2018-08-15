@@ -1,0 +1,36 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:applicationContext*.xml</param-value>
+	</context-param>
+
+	<!-- ServletContextListener :它也是在tomcat启动时就会运行, 加载spring提供的上下文监听器，这个监听器的作用就是我们在spring中写的new 
+		ClassPathXmlApplacationContext("配置的文件名"); 这是用来加载spring的容器的，并做容器初始化（生成bean,装配bean） -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>com.yc.web.listeners.InitListener</listener-class>
+	</listener>
+
+
+	
+
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<!-- springmvc的前端分发器 -->
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+
+</web-app>
